@@ -1,0 +1,1 @@
+This project is website where a user can create art with a basic Etch-a-Sketch
