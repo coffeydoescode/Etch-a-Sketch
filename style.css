@@ -46,5 +46,19 @@ h6 {
 * {
   font-family: poppins, sans-serif;
 }
-
+body {
+  background-color: cadetblue;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
 /* Div Styling */
+
+.paper {
+  width: 20px;
+  height: 20px;
+  margin: 1px;
+  border: none;
+  background-color: white;
+}
