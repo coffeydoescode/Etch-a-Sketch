@@ -1,14 +1,22 @@
-const div = document.createElement("div");
-
 const divContainer = document.querySelector(".container");
 
-divContainer.appendChild(div);
+function createRow() {
+  const rowBuild = document.createElement("div");
+  rowBuild.className = "row";
+  divContainer.append(rowBuild);
+}
 
-function divBuilder(numOfDivs) {
-  for (let i = 0; i < numOfDivs ** 2; i++) {
-    const div = document.createElement("div");
-    div.className = "paper";
-    divContainer.appendChild(div);
+function rowCount(numbOfRows) {
+  for (let i = 0; i < numbOfRows; i++) {
+    createRow();
   }
 }
-divBuilder(16);
+
+rowCount(10);
+const hello = document.querySelectorAll(".row");
+
+const column = document.createElement("div");
+
+column.className = "column";
+
+divContainer.firstChild.append(column);
