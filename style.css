@@ -51,11 +51,24 @@ body {
   justify-content: center;
   align-items: center;
 }
+.section-one {
+  width: 30%;
+  height: 100vh;
+}
+.section-two {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 70%;
+  height: 100vh;
+}
+
 .container {
   display: flex;
   flex-direction: column;
-  width: 40vw;
-  height: 40vw;
+  width: 45vw;
+  height: 45vw;
   border: 0.2rem solid black;
   align-items: stretch;
   background-color: white;
