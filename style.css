@@ -5,7 +5,7 @@
 *,
 *::before,
 *::after {
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
 }
 * {
   margin: 0;
@@ -58,24 +58,28 @@ body {
   height: 40vw;
   border: 0.2rem solid black;
   align-items: stretch;
-  background-color: lightcoral;
+  background-color: white;
 }
 /* Div Styling */
 
 .row {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
   height: 100%;
-  border: none;
-  margin: 1px;
-  background-color: lightblue;
-  flex-basis: 100%;
 }
 
 .column {
-  margin: 5px;
-  border: none;
-  background-color: white;
   flex-basis: 100%;
+}
+
+.row {
+  border-top: 0.5px solid gray;
+  border-bottom: 0.5px solid gray;
+  background-color: white;
+}
+.column {
+  border-right: 0.5px solid gray;
+  border-left: 0.5px solid gray;
+  background-color: white;
 }

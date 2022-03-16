@@ -24,12 +24,12 @@ function columnCount(numbOfColumns, currentRow) {
   }
 }
 
-rowCount(5);
+rowCount(20);
 
 const rowArray = Array.from(document.querySelectorAll(".row"));
 
 for (let i = 0; i < rowArray.length; i++) {
   let currentRow = rowArray[i];
   rowArray[i] = document.querySelector(".row");
-  columnCount(5, currentRow);
+  columnCount(20, currentRow);
 }
