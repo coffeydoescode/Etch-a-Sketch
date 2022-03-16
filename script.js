@@ -12,11 +12,24 @@ function rowCount(numbOfRows) {
   }
 }
 
-rowCount(10);
-const hello = document.querySelectorAll(".row");
+function createColumn(selector) {
+  const column = document.createElement("div");
+  column.className = "column";
+  selector.append(column);
+}
 
-const column = document.createElement("div");
+function columnCount(numbOfColumns, currentRow) {
+  for (let i = 0; i < numbOfColumns; i++) {
+    createColumn(currentRow);
+  }
+}
 
-column.className = "column";
+rowCount(5);
 
-divContainer.firstChild.append(column);
+const rowArray = Array.from(document.querySelectorAll(".row"));
+
+for (let i = 0; i < rowArray.length; i++) {
+  let currentRow = rowArray[i];
+  rowArray[i] = document.querySelector(".row");
+  columnCount(5, currentRow);
+}
