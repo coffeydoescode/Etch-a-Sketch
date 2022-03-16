@@ -43,13 +43,19 @@ h6 {
 }
 
 * {
-  font-family: poppins, sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 body {
   background-color: cadetblue;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  margin: 1rem;
 }
 .section-one {
   width: 30%;
@@ -69,9 +75,10 @@ body {
   flex-direction: column;
   width: 45vw;
   height: 45vw;
-  border: 0.2rem solid black;
+  border: 0.5rem solid black;
   align-items: stretch;
   background-color: white;
+  border-radius: 7px;
 }
 /* Div Styling */
 
