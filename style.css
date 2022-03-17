@@ -116,3 +116,10 @@ h1 {
   height: 60%;
   width: 25vw;
 }
+.menu button {
+  background-color: white;
+  height: fit-content;
+  width: unset;
+  border: none;
+  border-radius: 50px;
+}

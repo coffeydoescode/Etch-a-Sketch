@@ -55,3 +55,17 @@ function colorChange(color) {
 }
 // This function changes the background color of the grid boxes that the user "hovers"
 colorChange("red");
+
+const clearBtn = document.querySelector(".clear-btn");
+
+function cleanSlate() {
+  for (let i = 0; i < columnArray.length; i++) {
+    let currentColumn = columnArray[i];
+    currentColumn.style.backgroundColor = "white";
+  }
+}
+// This function sets all canvas columns background colors to white
+
+clearBtn.addEventListener("click", () => {
+  cleanSlate();
+});
