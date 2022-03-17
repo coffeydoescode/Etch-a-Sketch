@@ -24,12 +24,26 @@ function columnCount(numbOfColumns, currentRow) {
   }
 }
 
-rowCount(30);
+// function gridSize(length) {
+//   rowCount(length);
+//   columnCount(length);
+// }
+
+rowCount(10);
 
 const rowArray = Array.from(document.querySelectorAll(".row"));
 
 for (let i = 0; i < rowArray.length; i++) {
   let currentRow = rowArray[i];
   rowArray[i] = document.querySelector(".row");
-  columnCount(30, currentRow);
+  columnCount(10, currentRow);
+}
+
+const columnArray = Array.from(document.querySelectorAll(".column"));
+
+for (let i = 0; i < columnArray.length; i++) {
+  let currentColumn = columnArray[i];
+  currentColumn.addEventListener("mouseenter", () => {
+    currentColumn.style.backgroundColor = "red";
+  });
 }

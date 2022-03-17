@@ -57,6 +57,12 @@ h1 {
   font-size: 3rem;
   margin: 1rem;
 }
+.title {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  flex-basis: 100%;
+  white-space: nowrap;
+}
 .section-one {
   width: 30%;
   height: 100vh;
@@ -102,4 +108,11 @@ h1 {
   border-right: 0.5px solid gray;
   border-left: 0.5px solid gray;
   background-color: white;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  height: 60%;
+  width: 25vw;
 }
