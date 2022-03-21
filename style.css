@@ -113,7 +113,9 @@ h1 {
 .menu {
   display: flex;
   justify-content: center;
-  height: 60%;
+  align-items: center;
+  flex-direction: column;
+  /* height: 60%; */
   width: 25vw;
 }
 .menu button {
@@ -122,4 +124,13 @@ h1 {
   width: unset;
   border: none;
   border-radius: 50px;
+}
+#grid-size {
+  margin: 1rem;
+}
+.grid-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
 }

@@ -39,7 +39,7 @@ function gridSize(length) {
 }
 // This function updates the grid size based on the given number
 
-gridSize(4);
+gridSize(2);
 
 const columnArray = Array.from(document.querySelectorAll(".column"));
 
@@ -54,7 +54,7 @@ function colorChange(color) {
   }
 }
 // This function changes the background color of the grid boxes that the user "hovers"
-colorChange("red");
+colorChange("lightgray");
 
 const clearBtn = document.querySelector(".clear-btn");
 
@@ -69,3 +69,18 @@ function cleanSlate() {
 clearBtn.addEventListener("click", () => {
   cleanSlate();
 });
+
+const input = document.querySelector("input");
+
+let inputValue = input.value;
+const currentGridSize = document.querySelector("label");
+currentGridSize.innerText = inputValue;
+
+function updateGrid(gridSize) {
+  input.value = gridSize;
+  currentGridSize.innerText = gridSize;
+  inputValue = input.value;
+}
+updateGrid(33);
+// input.addEventListener("change", updateGrid(10));
+console.log(inputValue);
