@@ -81,6 +81,10 @@ function updateGrid(gridSize) {
   currentGridSize.innerText = gridSize;
   inputValue = input.value;
 }
-updateGrid(33);
-// input.addEventListener("change", updateGrid(10));
-console.log(inputValue);
+
+function updateLabel() {
+  input.addEventListener("input", () => {
+    updateGrid(input.valueAsNumber);
+  });
+}
+updateLabel();
