@@ -45,7 +45,8 @@ function getaRowArray() {
 
 const RowArray = getaRowArray();
 
-function gridBuilder(length) {
+function gridBuilder(length = value) {
+  gridClear();
   rowCount(length);
   const rowArray = Array.from(document.querySelectorAll(".row"));
   for (let i = 0; i < rowArray.length; i++) {
@@ -53,6 +54,8 @@ function gridBuilder(length) {
     rowArray[i] = document.querySelector(".row");
     columnCount(length, currentRow);
   }
+  console.log(getColumnArray().length);
+  colorChange("green");
 }
 // This function updates the grid size based on the given number
 
@@ -95,7 +98,6 @@ function updateLabel() {
 }
 updateLabel();
 
-gridBuilder(6);
 colorChange("green");
 
 function gridClear() {
@@ -110,6 +112,19 @@ function gridClear() {
 }
 // This function removes all rows and colums
 
-gridClear();
-gridBuilder(6);
-colorChange("green");
+// gridBuilder(16);
+// colorChange("green");
+
+function getInputValue() {
+  let newInputValue;
+  input.addEventListener("change", () => {
+    newInputValue = input.value;
+    console.log(newInputValue);
+    gridBuilder(newInputValue);
+  });
+  return newInputValue;
+}
+const defaultGrid = currentGridSize.textContent;
+gridBuilder(defaultGrid);
+getInputValue();
+console.log(defaultGrid);
