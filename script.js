@@ -28,7 +28,24 @@ function columnCount(numbOfColumns, currentRow) {
 }
 // This function builds a given amount of columns based on numOfColums specified
 
-function gridSize(length) {
+function getColumnArray() {
+  let totalColumns = document.querySelectorAll(".column");
+  let currentColumnArray = Array.from(totalColumns);
+  return currentColumnArray;
+}
+
+// This function creates an array based on the current number of columns
+const columnArray = getColumnArray();
+
+function getaRowArray() {
+  let totalRows = document.querySelectorAll(".row");
+  let currentRowArray = Array.from(totalRows);
+  return currentRowArray;
+}
+
+const RowArray = getaRowArray();
+
+function gridBuilder(length) {
   rowCount(length);
   const rowArray = Array.from(document.querySelectorAll(".row"));
   for (let i = 0; i < rowArray.length; i++) {
@@ -39,28 +56,23 @@ function gridSize(length) {
 }
 // This function updates the grid size based on the given number
 
-gridSize(2);
-
-const columnArray = Array.from(document.querySelectorAll(".column"));
-
 let color = "red";
 
 function colorChange(color) {
-  for (let i = 0; i < columnArray.length; i++) {
-    let currentColumn = columnArray[i];
+  for (let i = 0; i < getColumnArray().length; i++) {
+    let currentColumn = getColumnArray()[i];
     currentColumn.addEventListener("mouseenter", () => {
       currentColumn.style.backgroundColor = color;
     });
   }
 }
 // This function changes the background color of the grid boxes that the user "hovers"
-colorChange("lightgray");
 
 const clearBtn = document.querySelector(".clear-btn");
 
 function cleanSlate() {
-  for (let i = 0; i < columnArray.length; i++) {
-    let currentColumn = columnArray[i];
+  for (let i = 0; i < getColumnArray().length; i++) {
+    let currentColumn = getColumnArray()[i];
     currentColumn.style.backgroundColor = "white";
   }
 }
@@ -74,17 +86,30 @@ const input = document.querySelector("input");
 
 let inputValue = input.value;
 const currentGridSize = document.querySelector("label");
-currentGridSize.innerText = inputValue;
-
-function updateGrid(gridSize) {
-  input.value = gridSize;
-  currentGridSize.innerText = gridSize;
-  inputValue = input.value;
-}
+currentGridSize.textContent = inputValue;
 
 function updateLabel() {
   input.addEventListener("input", () => {
-    updateGrid(input.valueAsNumber);
+    currentGridSize.textContent = input.value;
   });
 }
 updateLabel();
+
+gridBuilder(6);
+colorChange("green");
+
+function gridClear() {
+  columns = getColumnArray;
+  for (let i = 0; i < columns().length; i++) {
+    columns()[i].remove();
+  }
+  rows = getaRowArray();
+  for (let i = 0; i < rows.length; i++) {
+    rows[i].remove();
+  }
+}
+// This function removes all rows and colums
+
+gridClear();
+gridBuilder(6);
+colorChange("green");
