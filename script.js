@@ -13,7 +13,7 @@ function rowCount(numbOfRows) {
   }
 }
 // This function builds a given amount of rows based on numOfRows specified
-let color = "blue";
+
 function createColumn(selector) {
   const column = document.createElement("div");
   column.className = "column";
@@ -64,6 +64,7 @@ let setColor = function (newColor) {
   color = newColor;
 };
 setColor("black");
+// Default Color
 // This function changes the background color of the grid boxes that the user "hovers"
 
 const clearBtn = document.querySelector(".clear-btn");
@@ -94,8 +95,6 @@ function updateLabel() {
 }
 updateLabel();
 
-// colorChange("red");
-
 function gridClear() {
   rows = getRowArray();
   for (let i = 0; i < rows.length; i++) {
@@ -104,17 +103,13 @@ function gridClear() {
 }
 // This function removes all rows and colums
 
-function getInputValue() {
+function resizeGrid() {
   input.addEventListener("change", () => {
     newInputValue = input.value;
     gridBuilder(input.value);
-    console.log(input.value);
   });
-  //   return newInputValue;
 }
+resizeGrid();
+// This function updates the grid size
 const defaultGrid = currentGridSize.textContent;
 gridBuilder(defaultGrid);
-getInputValue();
-// gridClear();
-// gridBuilder(30);
-// colorChange("red");
