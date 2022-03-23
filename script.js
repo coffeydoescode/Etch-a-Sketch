@@ -113,3 +113,5 @@ resizeGrid();
 // This function updates the grid size
 const defaultGrid = input.value;
 gridBuilder(defaultGrid);
+setColor("#09769E");
+// setColor("white");
