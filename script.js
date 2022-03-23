@@ -48,10 +48,10 @@ const rowArray = getRowArray();
 function gridBuilder(length = value) {
   gridClear();
   rowCount(length);
-  const rowArray = Array.from(document.querySelectorAll(".row"));
-  for (let i = 0; i < rowArray.length; i++) {
-    let currentRow = rowArray[i];
-    rowArray[i] = document.querySelector(".row");
+  rows = getRowArray();
+  for (let i = 0; i < rows.length; i++) {
+    let currentRow = rows[i];
+    rows[i] = document.querySelector(".row");
     columnCount(length, currentRow);
   }
   colorChange(color);
@@ -71,13 +71,16 @@ function colorChange(color) {
 // This function changes the background color of the grid boxes that the user "hovers"
 
 const clearBtn = document.querySelector(".clear-btn");
+function whiteOut(element) {
+  element.style.backgroundColor = "white";
+}
 
 function cleanSlate() {
-  for (let i = 0; i < getColumnArray().length; i++) {
-    let currentColumn = getColumnArray()[i];
-    currentColumn.style.backgroundColor = "white";
-  }
+  columns = getColumnArray();
+  columns.forEach((element) => whiteOut(element));
 }
+
+// array1.forEach(element => console.log(element));
 // This function sets all canvas columns background colors to white
 
 clearBtn.addEventListener("click", () => {
@@ -100,7 +103,7 @@ updateLabel();
 colorChange("red");
 
 function gridClear() {
-  rows = document.querySelectorAll(".row");
+  rows = getRowArray();
   for (let i = 0; i < rows.length; i++) {
     rows[i].remove();
   }
@@ -120,3 +123,4 @@ const defaultGrid = currentGridSize.textContent;
 gridBuilder(defaultGrid);
 getInputValue();
 // gridClear();
+// gridBuilder(30);
