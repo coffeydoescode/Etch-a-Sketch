@@ -13,11 +13,14 @@ function rowCount(numbOfRows) {
   }
 }
 // This function builds a given amount of rows based on numOfRows specified
-
+let color = "blue";
 function createColumn(selector) {
   const column = document.createElement("div");
   column.className = "column";
   selector.append(column);
+  column.addEventListener("mouseenter", () => {
+    column.style.backgroundColor = color;
+  });
 }
 // This function builds a column and appends it to the chosen selector
 
@@ -45,7 +48,7 @@ function getRowArray() {
 
 const rowArray = getRowArray();
 
-function gridBuilder(length = value) {
+function gridBuilder(length) {
   gridClear();
   rowCount(length);
   rows = getRowArray();
@@ -54,20 +57,13 @@ function gridBuilder(length = value) {
     rows[i] = document.querySelector(".row");
     columnCount(length, currentRow);
   }
-  colorChange(color);
 }
 // This function updates the grid size based on the given number
 
-let color = "red";
-
-function colorChange(color) {
-  for (let i = 0; i < getColumnArray().length; i++) {
-    let currentColumn = getColumnArray()[i];
-    currentColumn.addEventListener("mouseenter", () => {
-      currentColumn.style.backgroundColor = color;
-    });
-  }
-}
+let setColor = function (newColor) {
+  color = newColor;
+};
+setColor("black");
 // This function changes the background color of the grid boxes that the user "hovers"
 
 const clearBtn = document.querySelector(".clear-btn");
@@ -79,8 +75,6 @@ function cleanSlate() {
   columns = getColumnArray();
   columns.forEach((element) => whiteOut(element));
 }
-
-// array1.forEach(element => console.log(element));
 // This function sets all canvas columns background colors to white
 
 clearBtn.addEventListener("click", () => {
@@ -100,7 +94,7 @@ function updateLabel() {
 }
 updateLabel();
 
-colorChange("red");
+// colorChange("red");
 
 function gridClear() {
   rows = getRowArray();
@@ -111,16 +105,16 @@ function gridClear() {
 // This function removes all rows and colums
 
 function getInputValue() {
-  let newInputValue;
   input.addEventListener("change", () => {
     newInputValue = input.value;
-    console.log(newInputValue);
-    gridBuilder(newInputValue);
+    gridBuilder(input.value);
+    console.log(input.value);
   });
-  return newInputValue;
+  //   return newInputValue;
 }
 const defaultGrid = currentGridSize.textContent;
 gridBuilder(defaultGrid);
 getInputValue();
 // gridClear();
 // gridBuilder(30);
+// colorChange("red");
