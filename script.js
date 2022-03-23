@@ -90,7 +90,7 @@ currentGridSize.textContent = `${inputValue} X ${inputValue}`;
 
 function updateLabel() {
   input.addEventListener("input", () => {
-    currentGridSize.textContent = `${inputValue} X ${inputValue}`;
+    currentGridSize.textContent = `${input.value} X ${input.value}`;
   });
 }
 updateLabel();
