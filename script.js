@@ -86,11 +86,11 @@ const input = document.querySelector("input");
 
 let inputValue = input.value;
 const currentGridSize = document.querySelector("label");
-currentGridSize.textContent = inputValue;
+currentGridSize.textContent = `${inputValue} X ${inputValue}`;
 
 function updateLabel() {
   input.addEventListener("input", () => {
-    currentGridSize.textContent = input.value;
+    currentGridSize.textContent = `${inputValue} X ${inputValue}`;
   });
 }
 updateLabel();
@@ -111,5 +111,5 @@ function resizeGrid() {
 }
 resizeGrid();
 // This function updates the grid size
-const defaultGrid = currentGridSize.textContent;
+const defaultGrid = input.value;
 gridBuilder(defaultGrid);
