@@ -115,3 +115,16 @@ const defaultGrid = input.value;
 gridBuilder(defaultGrid);
 setColor("#09769E");
 // setColor("white");
+
+// function checkClick() {
+//   let columns = getColumnArray();
+//   for (let i = 0; i < columns.length; i++) {
+//     let currentColumn = columns[i];
+//     currentColumn.addEventListener("click", makeRed(currentColumn));
+//   }
+// }
+// checkClick();
+
+// function makeRed(element) {
+//   element.style.backgroundColor = "red";
+// }
