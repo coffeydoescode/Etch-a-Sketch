@@ -97,13 +97,13 @@ h1 {
 
 .column {
   flex-basis: 100%;
+  background-color: white;
 }
 
 .row {
   background-color: white;
 }
-.column {
-  background-color: white;
+.grid-lines {
   outline: 0.5px solid gray;
 }
 

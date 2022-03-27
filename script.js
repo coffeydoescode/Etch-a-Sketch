@@ -17,6 +17,7 @@ function rowCount(numbOfRows) {
 function createColumn(selector) {
   const column = document.createElement("div");
   column.className = "column";
+  column.classList.add("grid-lines");
   selector.append(column);
   column.addEventListener("mouseenter", () => {
     column.style.backgroundColor = color;
@@ -128,3 +129,12 @@ setColor("#09769E");
 // function makeRed(element) {
 //   element.style.backgroundColor = "red";
 // }
+
+const gridLinesInput = document.getElementById("grid-lines");
+
+gridLinesInput.addEventListener("click", () => {
+  columns = getColumnArray();
+  columns.forEach((element) => {
+    element.classList.toggle("grid-lines");
+  });
+});
