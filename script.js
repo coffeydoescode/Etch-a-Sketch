@@ -19,10 +19,8 @@ function createColumn(selector) {
   column.className = "column";
   column.classList.add("grid-lines");
   selector.append(column);
-  column.addEventListener("mouseenter", () => {
-    column.style.backgroundColor = color;
-  });
 }
+
 // This function builds a column and appends it to the chosen selector
 
 function columnCount(numbOfColumns, currentRow) {
@@ -39,7 +37,7 @@ function getColumnArray() {
 }
 
 // This function creates an array based on the current number of columns
-const columnArray = getColumnArray();
+const columnArray = getColumnArray;
 
 function getRowArray() {
   let totalRows = document.querySelectorAll(".row");
@@ -74,7 +72,7 @@ function whiteOut(element) {
 }
 
 function cleanSlate() {
-  columns = getColumnArray();
+  columns = columnArray();
   columns.forEach((element) => whiteOut(element));
 }
 // This function sets all canvas columns background colors to white
@@ -117,24 +115,37 @@ gridBuilder(defaultGrid);
 setColor("#09769E");
 // setColor("white");
 
-// function checkClick() {
-//   let columns = getColumnArray();
-//   for (let i = 0; i < columns.length; i++) {
-//     let currentColumn = columns[i];
-//     currentColumn.addEventListener("click", makeRed(currentColumn));
-//   }
-// }
-// checkClick();
-
-// function makeRed(element) {
-//   element.style.backgroundColor = "red";
-// }
-
 const gridLinesInput = document.getElementById("grid-lines");
 
 gridLinesInput.addEventListener("click", () => {
-  columns = getColumnArray();
+  columns = columnArray();
   columns.forEach((element) => {
     element.classList.toggle("grid-lines");
   });
 });
+
+const body = document.querySelector("body");
+
+function brushOn(currentDiv) {
+  currentDiv.target.style.backgroundColor = color;
+}
+
+function listenUp() {
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.addEventListener("mouseenter", brushOn);
+  }
+}
+
+listenUp();
+
+function colorOff() {
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.removeEventListener("mouseenter", brushOn);
+  }
+}
+
+body.addEventListener("click", colorOff);
