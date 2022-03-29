@@ -56,13 +56,14 @@ function gridBuilder(length) {
     rows[i] = document.querySelector(".row");
     columnCount(length, currentRow);
   }
+  listenUp();
 }
 // This function updates the grid size based on the given number
 
 let setColor = function (newColor) {
   color = newColor;
 };
-setColor("black");
+setColor("#F6BD60");
 // Default Color
 // This function changes the background color of the grid boxes that the user "hovers"
 
@@ -112,7 +113,7 @@ resizeGrid();
 // This function updates the grid size
 const defaultGrid = input.value;
 gridBuilder(defaultGrid);
-setColor("#09769E");
+setColor(color);
 // setColor("white");
 
 const gridLinesInput = document.getElementById("grid-lines");
@@ -138,8 +139,6 @@ function listenUp() {
   }
 }
 
-listenUp();
-
 function colorOff() {
   let columns = columnArray();
   for (i = 0; i < columns.length; i++) {
@@ -148,4 +147,4 @@ function colorOff() {
   }
 }
 
-body.addEventListener("click", colorOff);
+divContainer.addEventListener("click", colorOff);
