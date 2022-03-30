@@ -1,5 +1,10 @@
 const divContainer = document.querySelector(".container");
 
+let currentStatus;
+const brush = document.querySelector(".brush-container");
+const yellow = "#f6bd60";
+const offWhite = "#f2f4f3";
+
 function createRow() {
   const rowBuild = document.createElement("div");
   rowBuild.className = "row";
@@ -137,6 +142,8 @@ function listenUp() {
     let currentDiv = columns[i];
     currentDiv.addEventListener("mouseenter", brushOn);
   }
+  currentStatus = "ON";
+  brush.style.backgroundColor = yellow;
 }
 
 function colorOff() {
@@ -145,21 +152,22 @@ function colorOff() {
     let currentDiv = columns[i];
     currentDiv.removeEventListener("mouseenter", brushOn);
   }
+  currentStatus = "OFF";
+  brush.style.backgroundColor = offWhite;
 }
-
-divContainer.addEventListener("click", colorOff);
-
-const brush = document.querySelector(".brush-container");
 
 function brushHandler() {
-  if ((brush.style.backgroundColor = "#f2f4f3")) {
-    brush.style.backgroundColor = "#f6bd60";
-  } else if ((brush.style.backgroundColor = "#f6bd60")) {
-    brush.style.backgroundColor = "#f2f4f3";
+  if (currentStatus == "ON") {
+    colorOff();
+    console.log(currentStatus);
+  } else if (currentStatus == "OFF") {
+    listenUp();
+    console.log(currentStatus);
   }
 }
-
 function startPainting() {
+  divContainer.addEventListener("click", brushHandler);
   brush.addEventListener("click", brushHandler);
 }
+
 startPainting();
