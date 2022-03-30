@@ -148,3 +148,18 @@ function colorOff() {
 }
 
 divContainer.addEventListener("click", colorOff);
+
+const brush = document.querySelector(".brush-container");
+
+function brushHandler() {
+  if ((brush.style.backgroundColor = "#f2f4f3")) {
+    brush.style.backgroundColor = "#f6bd60";
+  } else if ((brush.style.backgroundColor = "#f6bd60")) {
+    brush.style.backgroundColor = "#f2f4f3";
+  }
+}
+
+function startPainting() {
+  brush.addEventListener("click", brushHandler);
+}
+startPainting();

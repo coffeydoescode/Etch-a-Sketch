@@ -26,11 +26,23 @@ h1 {
 }
 .section-two {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
   width: 70%;
   height: 100vh;
+}
+
+.brush-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50px;
+  background-color: #f6bd60;
+  background-color: #f2f4f3;
+  border: 2px solid black;
 }
 
 .container {
@@ -40,7 +52,7 @@ h1 {
   height: 45vw;
   border: 0.5rem solid black;
   align-items: stretch;
-  background-color: white;
+  background-color: #f2f4f3;
   border-radius: 7px;
 }
 /* Div Styling */
@@ -54,11 +66,11 @@ h1 {
 
 .column {
   flex-basis: 100%;
-  background-color: white;
+  background-color: #f2f4f3;
 }
 
 .row {
-  background-color: white;
+  background-color: #f2f4f3;
 }
 .grid-lines {
   outline: 0.5px solid gray;
@@ -73,7 +85,7 @@ h1 {
   width: 25vw;
 }
 .menu button {
-  background-color: white;
+  background-color: #f2f4f3;
   height: fit-content;
   width: unset;
   border: 2px solid black;
