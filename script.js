@@ -112,6 +112,12 @@ function resizeGrid() {
   input.addEventListener("change", () => {
     newInputValue = input.value;
     gridBuilder(input.value);
+    if (gridLinesInput.checked == false) {
+      columns = columnArray();
+      columns.forEach((element) => {
+        element.classList.remove("grid-lines");
+      });
+    }
   });
 }
 resizeGrid();
@@ -124,10 +130,17 @@ setColor(color);
 const gridLinesInput = document.getElementById("grid-lines");
 
 gridLinesInput.addEventListener("click", () => {
-  columns = columnArray();
-  columns.forEach((element) => {
-    element.classList.toggle("grid-lines");
-  });
+  if (gridLinesInput.checked) {
+    columns = columnArray();
+    columns.forEach((element) => {
+      element.classList.add("grid-lines");
+    });
+  } else {
+    columns = columnArray();
+    columns.forEach((element) => {
+      element.classList.remove("grid-lines");
+    });
+  }
 });
 
 const body = document.querySelector("body");
