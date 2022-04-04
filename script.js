@@ -184,3 +184,18 @@ function startPainting() {
 }
 
 startPainting();
+
+const colorChoice = document.getElementById("color-choice");
+
+function handleColor() {
+  color = colorChoice.value;
+  setColor(color);
+}
+
+function tempColor() {
+  brush.style.backgroundColor = colorChoice.value;
+}
+
+// colorChoice.addEventListener("input", tempColor);
+
+colorChoice.addEventListener("change", handleColor);
