@@ -2,6 +2,7 @@ const divContainer = document.querySelector(".container");
 
 let currentStatus;
 const brush = document.querySelector(".brush-container");
+
 const yellow = "#f6bd60";
 const offWhite = "#f2f4f3";
 
@@ -67,8 +68,26 @@ function gridBuilder(length) {
 
 let setColor = function (newColor) {
   color = newColor;
+  brush.style.backgroundColor = color;
 };
 setColor("#F6BD60");
+
+setColor("rgb(5, 60, 94)");
+
+function randomCol() {
+  return Math.floor(Math.random() * 255);
+}
+
+function randomRGB() {
+  let color =
+    "rgb(" + randomCol() + "," + randomCol() + "," + randomCol() + ")";
+  return `${color}`;
+}
+
+setColor(randomRGB());
+// Current function for a random color
+console.log(color);
+
 // Default Color
 // This function changes the background color of the grid boxes that the user "hovers"
 
@@ -156,7 +175,8 @@ function listenUp() {
     currentDiv.addEventListener("mouseenter", brushOn);
   }
   currentStatus = "ON";
-  brush.style.backgroundColor = yellow;
+  brush.style.backgroundColor = color;
+  brush.classList.remove("colorOff");
 }
 
 function colorOff() {
@@ -166,16 +186,14 @@ function colorOff() {
     currentDiv.removeEventListener("mouseenter", brushOn);
   }
   currentStatus = "OFF";
-  brush.style.backgroundColor = offWhite;
+  brush.classList.add("colorOff");
 }
 
 function brushHandler() {
   if (currentStatus == "ON") {
     colorOff();
-    console.log(currentStatus);
   } else if (currentStatus == "OFF") {
     listenUp();
-    console.log(currentStatus);
   }
 }
 function startPainting() {
@@ -196,6 +214,8 @@ function tempColor() {
   brush.style.backgroundColor = colorChoice.value;
 }
 
-// colorChoice.addEventListener("input", tempColor);
+colorChoice.addEventListener("input", tempColor);
 
 colorChoice.addEventListener("change", handleColor);
+
+const randomBtn = document.querySelector(".random");
