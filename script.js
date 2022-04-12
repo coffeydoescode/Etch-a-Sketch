@@ -84,9 +84,8 @@ function randomRGB() {
   return `${color}`;
 }
 
-setColor(randomRGB());
+// setColor(randomRGB());
 // Current function for a random color
-console.log(color);
 
 // Default Color
 // This function changes the background color of the grid boxes that the user "hovers"

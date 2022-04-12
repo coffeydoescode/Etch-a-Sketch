@@ -23,48 +23,43 @@
       <div>
         <h1 class="title">Etch-a-Sketch</h1>
       </div>
+      <div class="grid-input">
+        <input
+          type="range"
+          name="grid-size"
+          id="grid-size"
+          min="4"
+          max="64"
+          step="1"
+          value="4"
+        />
+        <label for="grid-size">Size</label>
+      </div>
       <div class="menu">
-        <button class="clear-btn">Clear</button>
-        <div class="grid-input">
-          <input
-            type="range"
-            name="grid-size"
-            id="grid-size"
-            min="4"
-            max="64"
-            step="1"
-            value="4"
-          />
-          <label for="grid-size">Size</label>
+        <div class="top-menu">
+          <button class="clear-btn">Clear</button>
+          <button class="grid-lines-toggle">Grid Lines</button>
         </div>
-        <div class="grid-lines-toggle">
-          <input
-            type="checkbox"
-            id="grid-lines"
-            name="grid-lines"
-            value="grid-lines"
-            checked
-          />
-          <label for="grid-lines">Grid Lines</label>
+        <div class="middle-menu">
+          <button class="random">Random</button>
+
+          <div class="color-section">
+            <button class="color-picker">
+              <div class="brush-container">
+                <img class="brush" src="assets/paintbrush.png" height="26" />
+              </div>
+            </button>
+          </div>
         </div>
-        <div class="color-choice">
-          <label for="color-choice">Choose a Color</label>
-          <input
-            type="color"
-            value="#f6bd60"
-            name="color-choice"
-            id="color-choice"
-          />
+        <div class="bottom-menu">
+          <button class="darken">Darken</button>
+          <button class="Lighten">Lighten</button>
         </div>
-        <button class="random">Random</button>
       </div>
     </section>
 
     <section class="section-two">
       <div class="container"></div>
-      <div class="brush-container">
-        <img class="brush" src="assets/paintbrush.png" height="36px" />
-      </div>
     </section>
   </body>
 </html>
