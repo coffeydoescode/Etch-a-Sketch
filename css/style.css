@@ -88,29 +88,40 @@ h1 {
   flex-direction: row;
   justify-content: center;
 }
-/* .middle-menu {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-.bottom-menu {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-} */
+
 .menu button {
-  background-color: #f2f4f3;
   width: 8rem;
   height: 4rem;
-  /* padding: 0.25rem; */
   border: 2px solid black;
   border-radius: 12px;
   margin: 1rem 1rem;
-  outline: 4px solid white;
 }
-.menu label {
-  font-size: inherit;
+
+.clear-btn {
+  background-color: #f9ce4e;
+  outline: 4px solid #f9ce4e;
 }
+.grid-lines-toggle {
+  background-color: #f7f0f0;
+  outline: 4px solid #f7f0f0;
+}
+.random-btn {
+  background-color: #d36582;
+  outline: 4px solid #d36582;
+}
+.color-picker {
+  background-color: #4babe7;
+  outline: 4px solid #4babe7;
+}
+.darken {
+  background-color: #9c9996;
+  outline: 4px solid #9c9996;
+}
+.lighten {
+  background-color: #cecaca;
+  outline: 4px solid #cecaca;
+}
+
 #grid-size {
   margin: 1rem;
 }
