@@ -1,7 +1,7 @@
 const divContainer = document.querySelector(".container");
 
 let currentStatus;
-const brush = document.querySelector(".brush-container");
+const brush = document.querySelector(".color-picker");
 
 const yellow = "#f6bd60";
 const offWhite = "#f2f4f3";
@@ -68,27 +68,9 @@ function gridBuilder(length) {
 
 let setColor = function (newColor) {
   color = newColor;
-  brush.style.backgroundColor = color;
+  brush.style.outlineColor = color;
 };
 setColor("#F6BD60");
-
-setColor("rgb(5, 60, 94)");
-
-function randomCol() {
-  return Math.floor(Math.random() * 255);
-}
-
-function randomRGB() {
-  let color =
-    "rgb(" + randomCol() + "," + randomCol() + "," + randomCol() + ")";
-  return `${color}`;
-}
-
-// setColor(randomRGB());
-// Current function for a random color
-
-// Default Color
-// This function changes the background color of the grid boxes that the user "hovers"
 
 const clearBtn = document.querySelector(".clear-btn");
 function whiteOut(element) {
@@ -105,15 +87,15 @@ clearBtn.addEventListener("click", () => {
   cleanSlate();
 });
 
-const input = document.querySelector("input");
+const gridSize = document.getElementById("grid-size");
 
-let inputValue = input.value;
+let inputValue = gridSize.value;
 const currentGridSize = document.querySelector("label");
 currentGridSize.textContent = `${inputValue} X ${inputValue}`;
 
 function updateLabel() {
-  input.addEventListener("input", () => {
-    currentGridSize.textContent = `${input.value} X ${input.value}`;
+  gridSize.addEventListener("input", () => {
+    currentGridSize.textContent = `${gridSize.value} X ${gridSize.value}`;
   });
 }
 updateLabel();
@@ -127,9 +109,9 @@ function gridClear() {
 // This function removes all rows and colums
 
 function resizeGrid() {
-  input.addEventListener("change", () => {
-    newInputValue = input.value;
-    gridBuilder(input.value);
+  gridSize.addEventListener("change", () => {
+    newInputValue = gridSize.value;
+    gridBuilder(gridSize.value);
     if (gridLinesInput.checked == false) {
       columns = columnArray();
       columns.forEach((element) => {
@@ -140,10 +122,9 @@ function resizeGrid() {
 }
 resizeGrid();
 // This function updates the grid size
-const defaultGrid = input.value;
+const defaultGrid = gridSize.value;
 gridBuilder(defaultGrid);
 setColor(color);
-// setColor("white");
 
 const gridLinesInput = document.querySelector(".grid-lines-toggle");
 
@@ -153,8 +134,6 @@ gridLinesInput.addEventListener("click", () => {
     element.classList.toggle("grid-lines");
   });
 });
-
-const body = document.querySelector("body");
 
 function brushOn(currentDiv) {
   currentDiv.target.style.backgroundColor = color;
@@ -167,7 +146,7 @@ function listenUp() {
     currentDiv.addEventListener("mouseenter", brushOn);
   }
   currentStatus = "ON";
-  brush.style.backgroundColor = color;
+  brush.style.outlineColor = color;
   brush.classList.remove("colorOff");
 }
 
@@ -178,7 +157,8 @@ function colorOff() {
     currentDiv.removeEventListener("mouseenter", brushOn);
   }
   currentStatus = "OFF";
-  brush.classList.add("colorOff");
+  // brush.classList.add("colorOff");
+  brush.style.outlineColor = "#4babe7";
 }
 
 function brushHandler() {
@@ -190,24 +170,23 @@ function brushHandler() {
 }
 function startPainting() {
   divContainer.addEventListener("click", brushHandler);
-  brush.addEventListener("click", brushHandler);
 }
 
-startPainting();
-
-const colorChoice = document.getElementById("color-choice");
+const colorChoice = document.getElementById("pick-color");
 
 function handleColor() {
   color = colorChoice.value;
   setColor(color);
 }
+handleColor();
 
 function tempColor() {
-  brush.style.backgroundColor = colorChoice.value;
+  brush.style.outlineColor = colorChoice.value;
 }
 
 colorChoice.addEventListener("input", tempColor);
 
 colorChoice.addEventListener("change", handleColor);
 
-const randomBtn = document.querySelector(".random");
+const randomBtn = document.querySelector(".random-btn");
+startPainting();

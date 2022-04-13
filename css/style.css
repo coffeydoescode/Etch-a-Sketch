@@ -90,8 +90,8 @@ h1 {
 }
 
 .menu button {
-  width: 8rem;
-  height: 4rem;
+  width: 10rem;
+  height: 6rem;
   border: 2px solid black;
   border-radius: 12px;
   margin: 1rem 1rem;
@@ -99,27 +99,27 @@ h1 {
 
 .clear-btn {
   background-color: #f9ce4e;
-  outline: 4px solid #f9ce4e;
+  outline: 0.5rem solid #f9ce4e;
 }
 .grid-lines-toggle {
   background-color: #f7f0f0;
-  outline: 4px solid #f7f0f0;
+  outline: 0.5rem solid #f7f0f0;
 }
 .random-btn {
   background-color: #d36582;
-  outline: 4px solid #d36582;
+  outline: 0.5rem solid #d36582;
 }
 .color-picker {
   background-color: #4babe7;
-  outline: 4px solid #4babe7;
+  outline: 0.5rem solid #4babe7;
 }
 .darken {
   background-color: #9c9996;
-  outline: 4px solid #9c9996;
+  outline: 0.5rem solid #9c9996;
 }
 .lighten {
   background-color: #cecaca;
-  outline: 4px solid #cecaca;
+  outline: 0.5rem solid #cecaca;
 }
 
 #grid-size {
@@ -137,8 +137,4 @@ h1 {
 .grid-lines-toggle {
   padding: 4px;
   user-select: none;
-}
-
-.colorOff {
-  opacity: 0.5;
 }
