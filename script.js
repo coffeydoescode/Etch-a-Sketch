@@ -145,20 +145,13 @@ gridBuilder(defaultGrid);
 setColor(color);
 // setColor("white");
 
-const gridLinesInput = document.getElementById("grid-lines");
+const gridLinesInput = document.querySelector(".grid-lines-toggle");
 
 gridLinesInput.addEventListener("click", () => {
-  if (gridLinesInput.checked) {
-    columns = columnArray();
-    columns.forEach((element) => {
-      element.classList.add("grid-lines");
-    });
-  } else {
-    columns = columnArray();
-    columns.forEach((element) => {
-      element.classList.remove("grid-lines");
-    });
-  }
+  columns = columnArray();
+  columns.forEach((element) => {
+    element.classList.toggle("grid-lines");
+  });
 });
 
 const body = document.querySelector("body");
