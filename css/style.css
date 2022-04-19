@@ -71,6 +71,7 @@ h1 {
 .row {
   background-color: #f2f4f3;
 }
+
 .grid-lines {
   outline: 0.5px solid gray;
 }
@@ -90,6 +91,8 @@ h1 {
 }
 
 .menu button {
+  background-color: #f9ce4e;
+  outline: 0.5rem solid #f9ce4e;
   width: 10rem;
   height: 6rem;
   border: 2px solid black;
@@ -102,16 +105,23 @@ h1 {
   outline: 0.5rem solid #f9ce4e;
 }
 .grid-lines-toggle {
-  background-color: #f7f0f0;
-  outline: 0.5rem solid #f7f0f0;
+  padding: 4px;
+  user-select: none;
+  /* background-color: #f7f0f0;
+  outline: 0.5rem solid #f7f0f0; */
+  background-color: #f9ce4e;
+  outline: 0.5rem solid black;
+}
+button.selected {
+  outline-color: black;
 }
 .random-btn {
-  background-color: #d36582;
-  outline: 0.5rem solid #d36582;
+  background-color: #f9ce4e;
+  outline: 0.5rem solid #f9ce4e;
 }
 .color-picker {
-  background-color: #4babe7;
-  outline: 0.5rem solid #4babe7;
+  background-color: #f9ce4e;
+  outline: 0.5rem solid #f9ce4e;
 }
 .darken {
   background-color: #9c9996;
@@ -132,9 +142,4 @@ h1 {
 }
 .grid-lines-toggle label {
   white-space: nowrap;
-}
-
-.grid-lines-toggle {
-  padding: 4px;
-  user-select: none;
 }

@@ -68,7 +68,7 @@ function gridBuilder(length) {
 
 let setColor = function (newColor) {
   color = newColor;
-  brush.style.outlineColor = color;
+  // brush.style.outlineColor = color;
 };
 setColor("#F6BD60");
 
@@ -90,7 +90,7 @@ clearBtn.addEventListener("click", () => {
 const gridSize = document.getElementById("grid-size");
 
 let inputValue = gridSize.value;
-const currentGridSize = document.querySelector("label");
+const currentGridSize = document.querySelector(".grid-label");
 currentGridSize.textContent = `${inputValue} X ${inputValue}`;
 
 function updateLabel() {
@@ -133,6 +133,7 @@ gridLinesInput.addEventListener("click", () => {
   columns.forEach((element) => {
     element.classList.toggle("grid-lines");
   });
+  gridLinesInput.classList.toggle("selected");
 });
 
 function brushOn(currentDiv) {
@@ -146,7 +147,7 @@ function listenUp() {
     currentDiv.addEventListener("mouseenter", brushOn);
   }
   currentStatus = "ON";
-  brush.style.outlineColor = color;
+  brush.style.outlineColor = "black";
   brush.classList.remove("colorOff");
 }
 
@@ -157,8 +158,8 @@ function colorOff() {
     currentDiv.removeEventListener("mouseenter", brushOn);
   }
   currentStatus = "OFF";
-  // brush.classList.add("colorOff");
-  brush.style.outlineColor = "#4babe7";
+  brush.classList.add("colorOff");
+  brush.style.outlineColor = "";
 }
 
 function brushHandler() {
@@ -183,8 +184,6 @@ handleColor();
 function tempColor() {
   brush.style.outlineColor = colorChoice.value;
 }
-
-colorChoice.addEventListener("input", tempColor);
 
 colorChoice.addEventListener("change", handleColor);
 

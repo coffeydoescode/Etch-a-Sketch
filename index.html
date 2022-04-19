@@ -23,39 +23,41 @@
       <div>
         <h1 class="title">Etch-a-Sketch</h1>
       </div>
-      <div class="grid-input">
-        <input
-          type="range"
-          name="grid-size"
-          id="grid-size"
-          min="4"
-          max="64"
-          step="1"
-          value="4"
-        />
-        <label for="grid-size"></label>
-      </div>
+
       <div class="menu">
         <div class="top-menu">
           <button class="clear-btn">Clear</button>
-          <button class="grid-lines-toggle">Grid Lines</button>
+          <button class="grid-lines-toggle selected">Grid Lines</button>
         </div>
         <div class="middle-menu">
-          <button class="random-btn">Random</button>
+          <button class="random-btn"><p>Random</p></button>
 
           <button class="color-picker">
+            <label for="pick-color">Color</label>
+
             <input
               type="color"
               name="pick-color"
-              value="#5F00BA"
+              value="#4B7F52"
               id="pick-color"
             />
-            <label for="pick-color">Color</label>
           </button>
         </div>
         <div class="bottom-menu">
           <button class="darken">Darken</button>
           <button class="lighten">Lighten</button>
+        </div>
+        <div class="grid-input">
+          <input
+            type="range"
+            name="grid-size"
+            id="grid-size"
+            min="4"
+            max="64"
+            step="1"
+            value="4"
+          />
+          <label class="grid-label" for="grid-size"></label>
         </div>
       </div>
     </section>
