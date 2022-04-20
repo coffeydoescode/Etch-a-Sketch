@@ -187,5 +187,46 @@ function tempColor() {
 
 colorChoice.addEventListener("change", handleColor);
 
+const darkenBtn = document.querySelector(".darken");
+
+darkenBtn.addEventListener("click", () => {
+  darkenBtn.classList.toggle("selected");
+});
+
+const lightenBtn = document.querySelector(".lighten");
+
+lightenBtn.addEventListener("click", () => {
+  lightenBtn.classList.toggle("selected");
+});
+
+let colorArray = [
+  "#09769E",
+  "#02182B",
+  "#41788C",
+  "#1E5A70",
+  "#3FB5E0",
+  "#2ADFCD",
+  "#540903ff",
+  "#f79992ff",
+  "#c9645dff",
+  "#8c312aff",
+  "#d92518ff",
+];
+
+function getRandomValue(array) {
+  let randomValue = [Math.floor(Math.random() * array.length)];
+  let randomColor = array[randomValue];
+  return randomColor;
+}
+
+function handleRandom() {
+  randomBtn.classList.toggle("selected");
+  randomColor = getRandomValue(colorArray);
+  color = randomColor;
+}
 const randomBtn = document.querySelector(".random-btn");
+
+randomBtn.addEventListener("click", handleRandom);
 startPainting();
+
+// getRandomValue(colorArray);

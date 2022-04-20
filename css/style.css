@@ -100,18 +100,11 @@ h1 {
   margin: 1rem 1rem;
 }
 
-.clear-btn {
-  background-color: #f9ce4e;
-  outline: 0.5rem solid #f9ce4e;
-}
 .grid-lines-toggle {
   padding: 4px;
   user-select: none;
-  /* background-color: #f7f0f0;
-  outline: 0.5rem solid #f7f0f0; */
-  background-color: #f9ce4e;
-  outline: 0.5rem solid black;
 }
+
 button.selected {
   outline-color: black;
 }
@@ -123,13 +116,21 @@ button.selected {
   background-color: #f9ce4e;
   outline: 0.5rem solid #f9ce4e;
 }
-.darken {
+button.darken {
   background-color: #9c9996;
   outline: 0.5rem solid #9c9996;
 }
-.lighten {
+button.darken.selected {
+  outline-color: black;
+}
+
+button.lighten {
   background-color: #cecaca;
   outline: 0.5rem solid #cecaca;
+}
+
+button.lighten.selected {
+  outline-color: black;
 }
 
 #grid-size {
