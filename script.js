@@ -147,8 +147,7 @@ function listenUp() {
     currentDiv.addEventListener("mouseenter", brushOn);
   }
   currentStatus = "ON";
-  brush.style.outlineColor = "black";
-  brush.classList.remove("colorOff");
+  brush.classList.toggle("selected");
 }
 
 function colorOff() {
@@ -158,8 +157,7 @@ function colorOff() {
     currentDiv.removeEventListener("mouseenter", brushOn);
   }
   currentStatus = "OFF";
-  brush.classList.add("colorOff");
-  brush.style.outlineColor = "";
+  brush.classList.toggle("selected");
 }
 
 function brushHandler() {
@@ -206,16 +204,17 @@ let colorArray = [
   "#1E5A70",
   "#3FB5E0",
   "#2ADFCD",
-  "#540903ff",
-  "#f79992ff",
-  "#c9645dff",
-  "#8c312aff",
-  "#d92518ff",
+  "#540903",
+  "#f79992",
+  "#c9645d",
+  "#8c312a",
+  "#d92518",
 ];
 
 function getRandomValue(array) {
   let randomValue = [Math.floor(Math.random() * array.length)];
   let randomColor = array[randomValue];
+  colorChoice.value = randomColor;
   return randomColor;
 }
 
@@ -228,5 +227,3 @@ const randomBtn = document.querySelector(".random-btn");
 
 randomBtn.addEventListener("click", handleRandom);
 startPainting();
-
-// getRandomValue(colorArray);
