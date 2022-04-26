@@ -1,10 +1,29 @@
 const divContainer = document.querySelector(".container");
 
-let currentStatus;
-const brush = document.querySelector(".color-picker");
+let colorStatus;
+let randomStatus = "OFF";
+const colorBtn = document.querySelector(".color-btn");
+const randomBtn = document.querySelector(".random-btn");
 
-const yellow = "#f6bd60";
-const offWhite = "#f2f4f3";
+let colorArray = [
+  "#09769E",
+  "#02182B",
+  "#41788C",
+  "#1E5A70",
+  "#3FB5E0",
+  "#2ADFCD",
+  "#540903",
+  "#f79992",
+  "#c9645d",
+  "#8c312a",
+  "#d92518",
+  "#77BA1A",
+  "#314517",
+  "#4d721d",
+  "#4e6929",
+  "#314517",
+  "#98c45e",
+];
 
 function createRow() {
   const rowBuild = document.createElement("div");
@@ -62,13 +81,12 @@ function gridBuilder(length) {
     rows[i] = document.querySelector(".row");
     columnCount(length, currentRow);
   }
-  listenUp();
+  colorOn();
 }
 // This function updates the grid size based on the given number
 
 let setColor = function (newColor) {
   color = newColor;
-  // brush.style.outlineColor = color;
 };
 setColor("#F6BD60");
 
@@ -140,35 +158,39 @@ function brushOn(currentDiv) {
   currentDiv.target.style.backgroundColor = color;
 }
 
-function listenUp() {
+function colorOn() {
+  colorBtn.classList.add("selected");
   let columns = columnArray();
   for (i = 0; i < columns.length; i++) {
     let currentDiv = columns[i];
     currentDiv.addEventListener("mouseenter", brushOn);
   }
-  currentStatus = "ON";
-  brush.classList.toggle("selected");
 }
 
 function colorOff() {
+  colorBtn.classList.remove("selected");
   let columns = columnArray();
   for (i = 0; i < columns.length; i++) {
     let currentDiv = columns[i];
     currentDiv.removeEventListener("mouseenter", brushOn);
   }
-  currentStatus = "OFF";
-  brush.classList.toggle("selected");
 }
 
-function brushHandler() {
-  if (currentStatus == "ON") {
+function colorBtnHandler() {
+  if (isSelected(colorBtn) == true) {
     colorOff();
-  } else if (currentStatus == "OFF") {
-    listenUp();
+    colorStatus = "Color Status = OFF";
+  } else if (isSelected(colorBtn) != true) {
+    deactivateRandom();
+    colorOn();
+    colorStatus = "Color Status = ON";
   }
+  console.log(colorStatus);
 }
+
 function startPainting() {
-  divContainer.addEventListener("click", brushHandler);
+  colorBtn.addEventListener("click", colorBtnHandler);
+  randomBtn.addEventListener("click", randomBtnHandler);
 }
 
 const colorChoice = document.getElementById("pick-color");
@@ -178,10 +200,6 @@ function handleColor() {
   setColor(color);
 }
 handleColor();
-
-function tempColor() {
-  brush.style.outlineColor = colorChoice.value;
-}
 
 colorChoice.addEventListener("change", handleColor);
 
@@ -197,33 +215,56 @@ lightenBtn.addEventListener("click", () => {
   lightenBtn.classList.toggle("selected");
 });
 
-let colorArray = [
-  "#09769E",
-  "#02182B",
-  "#41788C",
-  "#1E5A70",
-  "#3FB5E0",
-  "#2ADFCD",
-  "#540903",
-  "#f79992",
-  "#c9645d",
-  "#8c312a",
-  "#d92518",
-];
-
-function getRandomValue(array) {
-  let randomValue = [Math.floor(Math.random() * array.length)];
-  let randomColor = array[randomValue];
-  colorChoice.value = randomColor;
+function getRandomColor(array) {
+  let randomIndex = [Math.floor(Math.random() * array.length)];
+  let randomColor = array[randomIndex];
   return randomColor;
 }
 
-function handleRandom() {
-  randomBtn.classList.toggle("selected");
-  randomColor = getRandomValue(colorArray);
-  color = randomColor;
+function handleRandom(currentDiv) {
+  color = getRandomColor(colorArray);
+  currentDiv.target.style.backgroundColor = color;
 }
-const randomBtn = document.querySelector(".random-btn");
 
-randomBtn.addEventListener("click", handleRandom);
+function randomBtnHandler() {
+  if (isSelected(colorBtn) == true || isSelected(randomBtn) != true) {
+    colorOff();
+    activateRandom();
+  } else if (isSelected(randomBtn) == true) {
+    deactivateRandom();
+  }
+  console.log(randomStatus);
+}
+
+function activateRandom() {
+  randomBtn.classList.add("selected");
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.addEventListener("mouseenter", handleRandom);
+  }
+  // colorStatus = "OFF";
+  randomStatus = "Random Status = ON";
+}
+
+function deactivateRandom() {
+  randomBtn.classList.remove("selected");
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.removeEventListener("mouseenter", handleRandom);
+  }
+  randomStatus = "Random Status = OFF";
+  setColor(colorChoice.value);
+  // colorStatus = "ON";
+}
+
+function isSelected(element) {
+  if (element.classList.contains("selected")) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 startPainting();
