@@ -15,6 +15,7 @@ h1 {
 }
 .title {
   display: inline-flex;
+  align-items: center;
   flex-wrap: nowrap;
   flex-basis: 100%;
   white-space: nowrap;
@@ -143,4 +144,18 @@ button.lighten.selected {
 }
 .grid-lines-toggle label {
   white-space: nowrap;
+}
+#pick-color {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin: 1rem;
+  height: 3rem;
+  width: 3rem;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+}
+#pick-color::-webkit-color-swatch {
+  border-radius: 50%;
+  border: none;
 }

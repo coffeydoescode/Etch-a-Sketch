@@ -243,7 +243,6 @@ function activateRandom() {
     let currentDiv = columns[i];
     currentDiv.addEventListener("mouseenter", handleRandom);
   }
-  // colorStatus = "OFF";
   randomStatus = "Random Status = ON";
 }
 
