@@ -130,7 +130,7 @@ function resizeGrid() {
   gridSize.addEventListener("change", () => {
     newInputValue = gridSize.value;
     gridBuilder(gridSize.value);
-    if (gridLinesInput.checked == false) {
+    if (isSelected(gridLinesInput) == false) {
       columns = columnArray();
       columns.forEach((element) => {
         element.classList.remove("grid-lines");
