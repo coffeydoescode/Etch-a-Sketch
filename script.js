@@ -5,26 +5,6 @@ let randomStatus = "OFF";
 const colorBtn = document.querySelector(".color-btn");
 const randomBtn = document.querySelector(".random-btn");
 
-let colorArray = [
-  "#09769E",
-  "#02182B",
-  "#41788C",
-  "#1E5A70",
-  "#3FB5E0",
-  "#2ADFCD",
-  "#540903",
-  "#f79992",
-  "#c9645d",
-  "#8c312a",
-  "#d92518",
-  "#77BA1A",
-  "#314517",
-  "#4d721d",
-  "#4e6929",
-  "#314517",
-  "#98c45e",
-];
-
 function createRow() {
   const rowBuild = document.createElement("div");
   rowBuild.className = "row";
@@ -81,9 +61,23 @@ function gridBuilder(length) {
     rows[i] = document.querySelector(".row");
     columnCount(length, currentRow);
   }
-  colorOn();
+  if (isSelected(colorBtn) == true) {
+    colorOn();
+  } else if (isSelected(randomBtn) == true) {
+    activateRandom();
+  }
 }
 // This function updates the grid size based on the given number
+
+function randomCol() {
+  return Math.floor(Math.random() * 255);
+}
+
+function randomRGB() {
+  let color =
+    "rgb(" + randomCol() + "," + randomCol() + "," + randomCol() + ")";
+  return `${color}`;
+}
 
 let setColor = function (newColor) {
   color = newColor;
@@ -222,7 +216,7 @@ function getRandomColor(array) {
 }
 
 function handleRandom(currentDiv) {
-  color = getRandomColor(colorArray);
+  color = randomRGB();
   currentDiv.target.style.backgroundColor = color;
 }
 
