@@ -21,15 +21,7 @@
   <body>
     <section class="section-one">
       <div>
-        <h1 class="title">
-          Etch-a-Sketch
-          <input
-            type="color"
-            name="pick-color"
-            value="#E65160"
-            id="pick-color"
-          />
-        </h1>
+        <h1 class="title">Etch-a-Sketch</h1>
       </div>
 
       <div class="menu">
@@ -50,17 +42,28 @@
           <button class="darken">Darken</button>
           <button class="lighten">Lighten</button>
         </div>
-        <div class="grid-input">
-          <input
-            type="range"
-            name="grid-size"
-            id="grid-size"
-            min="4"
-            max="64"
-            step="1"
-            value="4"
-          />
-          <label class="grid-label" for="grid-size"></label>
+        <div class="input-menu">
+          <div class="grid-input">
+            <input
+              type="range"
+              name="grid-size"
+              id="grid-size"
+              min="4"
+              max="64"
+              step="1"
+              value="4"
+            />
+            <label class="grid-label" for="grid-size"></label>
+          </div>
+          <div class="color-picker">
+            <input
+              type="color"
+              name="pick-color"
+              value="#E65160"
+              id="pick-color"
+            />
+            <label for="pick-color">Choose a Color</label>
+          </div>
         </div>
       </div>
     </section>
