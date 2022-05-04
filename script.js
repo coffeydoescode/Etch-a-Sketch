@@ -192,6 +192,8 @@ const colorChoice = document.getElementById("pick-color");
 function handleColor() {
   color = colorChoice.value;
   setColor(color);
+  checkColor();
+  console.log(hexToRGB(colorChoice.value));
 }
 handleColor();
 
@@ -258,6 +260,23 @@ function isSelected(element) {
   } else {
     return false;
   }
+}
+function hexToRGB(h) {
+  let r = 0,
+    g = 0,
+    b = 0;
+
+  if (h.length == 7) {
+    r = "0x" + h[1] + h[2];
+    g = "0x" + h[3] + h[4];
+    b = "0x" + h[5] + h[6];
+  }
+
+  return "rgb(" + +r + "," + +g + "," + +b + ")";
+}
+
+function checkColor() {
+  console.log(colorChoice.value);
 }
 
 startPainting();
