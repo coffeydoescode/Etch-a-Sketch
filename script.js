@@ -179,7 +179,6 @@ function colorBtnHandler() {
     colorOn();
     colorStatus = "Color Status = ON";
   }
-  console.log(colorStatus);
 }
 
 function startPainting() {
@@ -192,8 +191,6 @@ const colorChoice = document.getElementById("pick-color");
 function handleColor() {
   color = colorChoice.value;
   setColor(color);
-  checkColor();
-  console.log(hexToRGB(colorChoice.value));
 }
 handleColor();
 
@@ -201,9 +198,27 @@ colorChoice.addEventListener("change", handleColor);
 
 const darkenBtn = document.querySelector(".darken");
 
-darkenBtn.addEventListener("click", () => {
+darkenBtn.addEventListener("click", handleDarken);
+
+function handleDarken() {
   darkenBtn.classList.toggle("selected");
-});
+  colorOff();
+  deactivateRandom();
+  shadingOn();
+}
+
+function shadingOn() {
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.addEventListener("mouseenter", darken);
+  }
+}
+function darken(currentDiv) {
+  let currentColor = currentDiv.target.style.backgroundColor;
+  RGBToHSL(currentColor);
+  console.log(currentColor);
+}
 
 const lightenBtn = document.querySelector(".lighten");
 
@@ -220,6 +235,7 @@ function getRandomColor(array) {
 function handleRandom(currentDiv) {
   color = randomRGB();
   currentDiv.target.style.backgroundColor = color;
+  console.log(color);
 }
 
 function randomBtnHandler() {
@@ -229,7 +245,6 @@ function randomBtnHandler() {
   } else if (isSelected(randomBtn) == true) {
     deactivateRandom();
   }
-  console.log(randomStatus);
 }
 
 function activateRandom() {
@@ -271,12 +286,59 @@ function hexToRGB(h) {
     g = "0x" + h[3] + h[4];
     b = "0x" + h[5] + h[6];
   }
-
-  return "rgb(" + +r + "," + +g + "," + +b + ")";
+  return +r + "," + +g + "," + +b;
 }
 
-function checkColor() {
-  console.log(colorChoice.value);
-}
+// function checkColor() {
+//   console.log(colorChoice.value);
+// }
+
+const RGBToHSL = (r, g, ...b) => {
+  r /= 255;
+  g /= 255;
+  b /= 255;
+  const l = Math.max(r, g, b);
+  const s = l - Math.min(r, g, b);
+  const h = s
+    ? l === r
+      ? (g - b) / s
+      : l === g
+      ? 2 + (b - r) / s
+      : 4 + (r - g) / s
+    : 0;
+  let H = Math.floor(60 * h < 0 ? 60 * h + 360 : 60 * h);
+  let S = Math.floor(
+    100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0)
+  );
+  let L = Math.floor((100 * (2 * l - s)) / 2);
+  return `${H},${S},${L}`;
+};
+
+const rgbColor = "rgb(19,25,255)";
+console.log(rgbColor);
+
+let rgbStart = rgbColor.indexOf("(");
+console.log(rgbStart);
+
+let rgbEnd = rgbColor.indexOf(")");
+console.log(rgbEnd);
+
+let cleanRGB = rgbColor.slice(rgbStart + 1, rgbEnd);
+console.log(cleanRGB);
+
+let rgbArray = cleanRGB.split(",");
+console.log(rgbArray);
+
+let redChannel = rgbArray[0];
+console.log(redChannel);
+
+let greenChannel = rgbArray[1];
+console.log(greenChannel);
+
+let blueChannel = rgbArray[2];
+console.log(blueChannel);
+
+let newHSL = RGBToHSL(redChannel, greenChannel, blueChannel);
+console.log(newHSL);
 
 startPainting();
