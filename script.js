@@ -293,7 +293,7 @@ function hexToRGB(h) {
 //   console.log(colorChoice.value);
 // }
 
-const RGBToHSL = (r, g, ...b) => {
+const RGBToHSL = (r, g, b) => {
   r /= 255;
   g /= 255;
   b /= 255;
@@ -311,34 +311,149 @@ const RGBToHSL = (r, g, ...b) => {
     100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0)
   );
   let L = Math.floor((100 * (2 * l - s)) / 2);
-  return `${H},${S},${L}`;
+  return `hsl(${H},${S}%,${L}%)`;
 };
 
-const rgbColor = "rgb(19,25,255)";
-console.log(rgbColor);
+let abc = "rgb(19,25,255)";
 
-let rgbStart = rgbColor.indexOf("(");
-console.log(rgbStart);
+function formatRGB(rgb) {
+  const rgbColor = rgb;
 
-let rgbEnd = rgbColor.indexOf(")");
-console.log(rgbEnd);
+  let rgbStart = rgbColor.indexOf("(");
 
-let cleanRGB = rgbColor.slice(rgbStart + 1, rgbEnd);
-console.log(cleanRGB);
+  let rgbEnd = rgbColor.indexOf(")");
 
-let rgbArray = cleanRGB.split(",");
-console.log(rgbArray);
+  let cleanRGB = rgbColor.slice(rgbStart + 1, rgbEnd);
 
-let redChannel = rgbArray[0];
-console.log(redChannel);
+  let rgbArray = cleanRGB.split(",");
 
-let greenChannel = rgbArray[1];
-console.log(greenChannel);
+  let redChannel = rgbArray[0];
 
-let blueChannel = rgbArray[2];
-console.log(blueChannel);
+  let greenChannel = rgbArray[1];
 
-let newHSL = RGBToHSL(redChannel, greenChannel, blueChannel);
-console.log(newHSL);
+  let blueChannel = rgbArray[2];
+
+  return RGBToHSL(redChannel, greenChannel, blueChannel);
+}
+
+// console.log(formatRGB(abc));
+
+let oldHSL = "hsl(238,100%,53%)";
+
+function formatHSL(hsl) {
+  let hslStart = hsl.indexOf("(");
+
+  let hslEnd = hsl.indexOf(")");
+
+  let cleanHSL = hsl.slice(hslStart + 1, hslEnd);
+
+  let HSLarray = cleanHSL.split(",");
+
+  let hue = HSLarray[0];
+
+  let s = HSLarray[1];
+  let sIndex = s.indexOf("%");
+
+  let saturation = s.slice(0, sIndex);
+
+  let l = HSLarray[2];
+
+  let lIndex = l.indexOf("%");
+
+  let lightness = l.slice(0, lIndex);
+  let newHSL = [hue, saturation, lightness];
+
+  // console.log(newHSL);
+
+  return newHSL;
+}
+
+formatHSL(oldHSL);
+
+function toNum(string) {
+  let number = parseInt(string);
+  return number;
+}
+
+function lighten(LValue) {
+  let x = toNum(LValue);
+  x += 10;
+  if (x > 100) {
+    x = 100;
+  }
+  return x;
+}
+
+function darken(LValue) {
+  let x = toNum(LValue);
+  x -= 10;
+  if (x < 0) {
+    x = 0;
+  }
+  return x;
+}
+
+function newHSL(hue, saturation, lightness) {
+  let newHSL = `hsl(${hue},${saturation}%,${lightness}%)`;
+  console.log(newHSL);
+  return newHSL;
+}
+
+function lightenHSL(hslColor) {
+  let oldHSL = Array.from(formatHSL(hslColor));
+  let hue = oldHSL[0];
+  let saturation = oldHSL[1];
+  let lightness = oldHSL[2];
+  console.log(oldHSL);
+  lightness = lighten(lightness);
+  console.log(lightness);
+  return newHSL(hue, saturation, lightness);
+}
+
+function darkenHSL(hslColor) {
+  let oldHSL = Array.from(formatHSL(hslColor));
+  let hue = oldHSL[0];
+  let saturation = oldHSL[1];
+  let lightness = oldHSL[2];
+  console.log(oldHSL);
+  lightness = darken(lightness);
+  console.log(lightness);
+  return newHSL(hue, saturation, lightness);
+}
+
+let hello = oldHSL;
+// lightenHSL(hello);
+
+// hello = darkenHSL(hello);
+// console.log(hello);
+// hello = darkenHSL(hello);
+// console.log(hello);
+// hello = darkenHSL(hello);
+// console.log(hello);
+// hello = darkenHSL(hello);
+// console.log(hello);
+// hello = darkenHSL(hello);
+// console.log(hello);
+// hello = darkenHSL(hello);
+// console.log(hello);
+// hello = darkenHSL(hello);
+// console.log(hello);
+
+// console.log("\nLighten Test Below" + "\n");
+
+// lightenHSL(hello);
+// console.log(hello);
+// hello = lightenHSL(hello);
+// console.log(hello);
+// hello = lightenHSL(hello);
+// console.log(hello);
+// hello = lightenHSL(hello);
+// console.log(hello);
+// hello = lightenHSL(hello);
+// console.log(hello);
+// hello = lightenHSL(hello);
+// console.log(hello);
+// hello = lightenHSL(hello);
+// console.log(hello);
 
 startPainting();
