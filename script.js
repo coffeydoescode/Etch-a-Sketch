@@ -216,8 +216,10 @@ function shadingOn() {
 }
 function darken(currentDiv) {
   let currentColor = currentDiv.target.style.backgroundColor;
-  RGBToHSL(currentColor);
-  console.log(currentColor);
+  formatRGB(currentColor);
+  formatHSL(formatRGB(currentColor));
+  let newColor = darkenHSL(formatRGB(currentColor));
+  currentDiv.target.style.backgroundColor = newColor;
 }
 
 const lightenBtn = document.querySelector(".lighten");
@@ -235,7 +237,6 @@ function getRandomColor(array) {
 function handleRandom(currentDiv) {
   color = randomRGB();
   currentDiv.target.style.backgroundColor = color;
-  console.log(color);
 }
 
 function randomBtnHandler() {
@@ -289,10 +290,6 @@ function hexToRGB(h) {
   return +r + "," + +g + "," + +b;
 }
 
-// function checkColor() {
-//   console.log(colorChoice.value);
-// }
-
 const RGBToHSL = (r, g, b) => {
   r /= 255;
   g /= 255;
@@ -332,11 +329,8 @@ function formatRGB(rgb) {
   let greenChannel = rgbArray[1];
 
   let blueChannel = rgbArray[2];
-
   return RGBToHSL(redChannel, greenChannel, blueChannel);
 }
-
-// console.log(formatRGB(abc));
 
 let oldHSL = "hsl(238,100%,53%)";
 
@@ -363,19 +357,15 @@ function formatHSL(hsl) {
   let lightness = l.slice(0, lIndex);
   let newHSL = [hue, saturation, lightness];
 
-  // console.log(newHSL);
-
   return newHSL;
 }
-
-formatHSL(oldHSL);
 
 function toNum(string) {
   let number = parseInt(string);
   return number;
 }
 
-function lighten(LValue) {
+function addlightness(LValue) {
   let x = toNum(LValue);
   x += 10;
   if (x > 100) {
@@ -384,7 +374,7 @@ function lighten(LValue) {
   return x;
 }
 
-function darken(LValue) {
+function subtractlightness(LValue) {
   let x = toNum(LValue);
   x -= 10;
   if (x < 0) {
@@ -395,7 +385,6 @@ function darken(LValue) {
 
 function newHSL(hue, saturation, lightness) {
   let newHSL = `hsl(${hue},${saturation}%,${lightness}%)`;
-  console.log(newHSL);
   return newHSL;
 }
 
@@ -404,9 +393,7 @@ function lightenHSL(hslColor) {
   let hue = oldHSL[0];
   let saturation = oldHSL[1];
   let lightness = oldHSL[2];
-  console.log(oldHSL);
-  lightness = lighten(lightness);
-  console.log(lightness);
+  lightness = addlightness(lightness);
   return newHSL(hue, saturation, lightness);
 }
 
@@ -415,45 +402,21 @@ function darkenHSL(hslColor) {
   let hue = oldHSL[0];
   let saturation = oldHSL[1];
   let lightness = oldHSL[2];
-  console.log(oldHSL);
-  lightness = darken(lightness);
-  console.log(lightness);
+  lightness = subtractlightness(lightness);
   return newHSL(hue, saturation, lightness);
 }
 
-let hello = oldHSL;
-// lightenHSL(hello);
+function checkColor(currentColor) {
+  let colorType = currentColor.slice(0, 3);
+  if (colorType == "rgb") {
+    return "rgb";
+  } else if (colorType == "hsl") {
+    return "hsl";
+  } else console.error("color is not defined");
+}
 
-// hello = darkenHSL(hello);
-// console.log(hello);
-// hello = darkenHSL(hello);
-// console.log(hello);
-// hello = darkenHSL(hello);
-// console.log(hello);
-// hello = darkenHSL(hello);
-// console.log(hello);
-// hello = darkenHSL(hello);
-// console.log(hello);
-// hello = darkenHSL(hello);
-// console.log(hello);
-// hello = darkenHSL(hello);
-// console.log(hello);
-
-// console.log("\nLighten Test Below" + "\n");
-
-// lightenHSL(hello);
-// console.log(hello);
-// hello = lightenHSL(hello);
-// console.log(hello);
-// hello = lightenHSL(hello);
-// console.log(hello);
-// hello = lightenHSL(hello);
-// console.log(hello);
-// hello = lightenHSL(hello);
-// console.log(hello);
-// hello = lightenHSL(hello);
-// console.log(hello);
-// hello = lightenHSL(hello);
-// console.log(hello);
+function getCurrentColor(e) {
+  return e.target.style.backgroundColor;
+}
 
 startPainting();
