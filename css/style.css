@@ -68,11 +68,6 @@ h1 {
 
 .column {
   flex-basis: 100%;
-  background-color: #f2f4f3;
-}
-
-.row {
-  background-color: #f2f4f3;
 }
 
 .grid-lines {

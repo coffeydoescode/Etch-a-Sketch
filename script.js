@@ -175,7 +175,9 @@ function colorBtnHandler() {
     colorOff();
     colorStatus = "Color Status = OFF";
   } else if (isSelected(colorBtn) != true) {
+    shadingOff();
     deactivateRandom();
+    lightenOff();
     colorOn();
     colorStatus = "Color Status = ON";
   }
@@ -201,13 +203,26 @@ const darkenBtn = document.querySelector(".darken");
 darkenBtn.addEventListener("click", handleDarken);
 
 function handleDarken() {
-  darkenBtn.classList.toggle("selected");
-  colorOff();
-  deactivateRandom();
-  shadingOn();
+  if (isSelected(darkenBtn) != true) {
+    colorOff();
+    deactivateRandom();
+    shadingOn();
+  } else if (isSelected(darkenBtn) == true) {
+    shadingOff();
+  }
+}
+
+function shadingOff() {
+  darkenBtn.classList.remove("selected");
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.removeEventListener("mouseenter", darken);
+  }
 }
 
 function shadingOn() {
+  darkenBtn.classList.add("selected");
   let columns = columnArray();
   for (i = 0; i < columns.length; i++) {
     let currentDiv = columns[i];
@@ -224,9 +239,44 @@ function darken(currentDiv) {
 
 const lightenBtn = document.querySelector(".lighten");
 
-lightenBtn.addEventListener("click", () => {
-  lightenBtn.classList.toggle("selected");
-});
+lightenBtn.addEventListener("click", handleLighten);
+
+function handleLighten() {
+  if (isSelected(lightenBtn) != true) {
+    colorOff();
+    deactivateRandom();
+    shadingOff();
+    lightenOn();
+  } else if (isSelected(lightenBtn) == true) {
+    lightenOff();
+  }
+}
+
+function lightenOn() {
+  lightenBtn.classList.add("selected");
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.addEventListener("mouseenter", lighten);
+  }
+}
+
+function lightenOff() {
+  lightenBtn.classList.remove("selected");
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.removeEventListener("mouseenter", lighten);
+  }
+}
+
+function lighten(currentDiv) {
+  let currentColor = currentDiv.target.style.backgroundColor;
+  formatRGB(currentColor);
+  formatHSL(formatRGB(currentColor));
+  let newColor = lightenHSL(formatRGB(currentColor));
+  currentDiv.target.style.backgroundColor = newColor;
+}
 
 function getRandomColor(array) {
   let randomIndex = [Math.floor(Math.random() * array.length)];
@@ -242,6 +292,8 @@ function handleRandom(currentDiv) {
 function randomBtnHandler() {
   if (isSelected(colorBtn) == true || isSelected(randomBtn) != true) {
     colorOff();
+    shadingOff();
+    lightenOff();
     activateRandom();
   } else if (isSelected(randomBtn) == true) {
     deactivateRandom();
