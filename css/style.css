@@ -54,7 +54,7 @@ h1 {
   height: 45vw;
   border: 0.5rem solid black;
   align-items: stretch;
-  background-color: #f2f4f3;
+  background-color: white;
   border-radius: 7px;
 }
 /* Div Styling */
@@ -68,7 +68,7 @@ h1 {
 
 .column {
   flex-basis: 100%;
-  background-color: #f2f4f3;
+  background-color: white;
 }
 
 .grid-lines {
@@ -191,4 +191,15 @@ button.lighten.selected {
 }
 .color-picker label {
   font-size: 1rem;
+}
+.quote {
+  padding: 1rem;
+  text-align: center;
+}
+a {
+  color: black;
+  text-decoration: none;
+}
+a:visited {
+  color: #f9ce4e;
 }
