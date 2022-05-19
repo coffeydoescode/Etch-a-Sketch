@@ -206,6 +206,7 @@ function handleDarken() {
   if (isSelected(darkenBtn) != true) {
     colorOff();
     deactivateRandom();
+    lightenOff();
     shadingOn();
   } else if (isSelected(darkenBtn) == true) {
     shadingOff();
@@ -230,7 +231,7 @@ function shadingOn() {
   }
 }
 function darken(currentDiv) {
-  let currentColor = currentDiv.target.style.backgroundColor;
+  let currentColor = checkStyle(currentDiv.target);
   formatRGB(currentColor);
   formatHSL(formatRGB(currentColor));
   let newColor = darkenHSL(formatRGB(currentColor));
@@ -271,7 +272,7 @@ function lightenOff() {
 }
 
 function lighten(currentDiv) {
-  let currentColor = currentDiv.target.style.backgroundColor;
+  let currentColor = checkStyle(currentDiv.target);
   formatRGB(currentColor);
   formatHSL(formatRGB(currentColor));
   let newColor = lightenHSL(formatRGB(currentColor));
@@ -464,11 +465,14 @@ function checkColor(currentColor) {
     return "rgb";
   } else if (colorType == "hsl") {
     return "hsl";
-  } else console.error("color is not defined");
-}
-
-function getCurrentColor(e) {
-  return e.target.style.backgroundColor;
+  } else if ((colorType = "")) {
+    console.error("color is not defined");
+  }
 }
 
 startPainting();
+
+function checkStyle(element) {
+  let currentColor = getComputedStyle(element);
+  return currentColor.backgroundColor;
+}
