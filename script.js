@@ -1,7 +1,10 @@
 const divContainer = document.querySelector(".container");
 
 let colorStatus;
-let randomStatus = "OFF";
+let randomStatus;
+let darkenStatus;
+let lightenStatus;
+
 const colorBtn = document.querySelector(".color-btn");
 const randomBtn = document.querySelector(".random-btn");
 
@@ -173,19 +176,20 @@ function colorOff() {
 function colorBtnHandler() {
   if (isSelected(colorBtn) == true) {
     colorOff();
-    colorStatus = "Color Status = OFF";
   } else if (isSelected(colorBtn) != true) {
     shadingOff();
     deactivateRandom();
     lightenOff();
     colorOn();
-    colorStatus = "Color Status = ON";
   }
 }
 
 function startPainting() {
   colorBtn.addEventListener("click", colorBtnHandler);
   randomBtn.addEventListener("click", randomBtnHandler);
+  darkenBtn.addEventListener("click", handleDarken);
+  lightenBtn.addEventListener("click", handleLighten);
+  divContainer.addEventListener("dblclick", handleDBL);
 }
 
 const colorChoice = document.getElementById("pick-color");
@@ -200,7 +204,7 @@ colorChoice.addEventListener("change", handleColor);
 
 const darkenBtn = document.querySelector(".darken");
 
-darkenBtn.addEventListener("click", handleDarken);
+// darkenBtn.addEventListener("click", handleDarken);
 
 function handleDarken() {
   if (isSelected(darkenBtn) != true) {
@@ -240,7 +244,7 @@ function darken(currentDiv) {
 
 const lightenBtn = document.querySelector(".lighten");
 
-lightenBtn.addEventListener("click", handleLighten);
+// lightenBtn.addEventListener("click", handleLighten);
 
 function handleLighten() {
   if (isSelected(lightenBtn) != true) {
@@ -308,7 +312,6 @@ function activateRandom() {
     let currentDiv = columns[i];
     currentDiv.addEventListener("mouseenter", handleRandom);
   }
-  randomStatus = "Random Status = ON";
 }
 
 function deactivateRandom() {
@@ -318,9 +321,7 @@ function deactivateRandom() {
     let currentDiv = columns[i];
     currentDiv.removeEventListener("mouseenter", handleRandom);
   }
-  randomStatus = "Random Status = OFF";
   setColor(colorChoice.value);
-  // colorStatus = "ON";
 }
 
 function isSelected(element) {
@@ -470,9 +471,189 @@ function checkColor(currentColor) {
   }
 }
 
-startPainting();
-
 function checkStyle(element) {
   let currentColor = getComputedStyle(element);
   return currentColor.backgroundColor;
 }
+
+const btnArray = [colorBtn, darkenBtn, lightenBtn, randomBtn];
+
+const statusArray = [randomStatus, colorStatus, darkenStatus, lightenStatus];
+
+function handleDBL(e) {
+  let currentTool = checkBtn();
+  console.log(currentTool);
+  checkPausedTool();
+  pauseRandomBtn(currentTool);
+  checkPausedTool();
+  pauseColorBtn(currentTool);
+  checkPausedTool();
+  pauseDarkenBtn(currentTool);
+  checkPausedTool();
+  pauseLightenBtn(currentTool);
+}
+
+function checkPausedTool() {
+  if (randomStatus == "paused" && isSelected(randomBtn) == false) {
+    console.log(isSelected(randomBtn));
+    let columns = columnArray();
+    for (i = 0; i < columns.length; i++) {
+      let currentDiv = columns[i];
+      currentDiv.removeEventListener("mouseenter", handleRandom);
+    }
+    return (randomStatus = "");
+  } else if (colorStatus == "paused" && isSelected(colorBtn) == false) {
+    console.log(isSelected(colorBtn));
+    let columns = columnArray();
+    for (i = 0; i < columns.length; i++) {
+      let currentDiv = columns[i];
+      currentDiv.removeEventListener("mouseenter", brushOn);
+    }
+    return (colorStatus = "");
+  } else if (darkenStatus == "paused" && isSelected(darkenBtn) == false) {
+    console.log(isSelected(darkenBtn));
+    let columns = columnArray();
+    for (i = 0; i < columns.length; i++) {
+      let currentDiv = columns[i];
+      currentDiv.removeEventListener("mouseenter", darken);
+    }
+    return (darkenStatus = "");
+  } else if (lightenStatus == "paused" && isSelected(lightenBtn) == false) {
+    console.log(isSelected(lightenBtn));
+    let columns = columnArray();
+    for (i = 0; i < columns.length; i++) {
+      let currentDiv = columns[i];
+      currentDiv.removeEventListener("mouseenter", lighten);
+    }
+    return (lightenStatus = "");
+  }
+}
+
+function checkBtn() {
+  for (button of btnArray) {
+    if (isSelected(button) == true) {
+      return button.innerText.toLowerCase();
+    }
+  }
+}
+
+// function clearListeners(){
+
+// }
+
+function pauseRandomBtn(currentTool) {
+  if (currentTool == "random" && randomStatus != "paused") {
+    pauseRandom();
+    // console.log("random status is " + randomStatus);
+  } else if (randomStatus == "paused") {
+    unPauseRandom();
+
+    console.log("random status is " + randomStatus);
+  }
+}
+
+function pauseRandom() {
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.removeEventListener("mouseenter", handleRandom);
+  }
+  return (randomStatus = "paused");
+}
+
+function unPauseRandom() {
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.addEventListener("mouseenter", handleRandom);
+  }
+  return (randomStatus = "un-paused");
+}
+
+function pauseColorBtn(currentTool) {
+  if (currentTool == "color" && colorStatus != "paused") {
+    pauseColor();
+    // console.log("color status is " + colorStatus);
+  } else if (colorStatus == "paused") {
+    unPauseColor();
+
+    console.log("color status is " + colorStatus);
+  }
+}
+
+function pauseColor() {
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.removeEventListener("mouseenter", brushOn);
+  }
+  return (colorStatus = "paused");
+}
+
+function unPauseColor() {
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.addEventListener("mouseenter", brushOn);
+  }
+  return (colorStatus = "un-paused");
+}
+
+function pauseDarkenBtn(currentTool) {
+  if (currentTool == "darken" && darkenStatus != "paused") {
+    pauseDarken();
+    // console.log("darken status is " + darkenStatus);
+  } else if (darkenStatus == "paused") {
+    unPauseDarken();
+
+    console.log("darken status is " + darkenStatus);
+  }
+}
+
+function pauseDarken() {
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.removeEventListener("mouseenter", darken);
+  }
+  return (darkenStatus = "paused");
+}
+
+function unPauseDarken() {
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.addEventListener("mouseenter", darken);
+  }
+  return (darkenStatus = "un-paused");
+}
+
+function pauseLightenBtn(currentTool) {
+  if (currentTool == "lighten" && lightenStatus != "paused") {
+    pauseLighten();
+    // console.log("Lighten status is " + lightenStatus);
+  } else if (lightenStatus == "paused") {
+    unPauseLighten();
+
+    console.log("Lighten status is " + lightenStatus);
+  }
+}
+
+function pauseLighten() {
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.removeEventListener("mouseenter", lighten);
+  }
+  return (lightenStatus = "paused");
+}
+
+function unPauseLighten() {
+  let columns = columnArray();
+  for (i = 0; i < columns.length; i++) {
+    let currentDiv = columns[i];
+    currentDiv.addEventListener("mouseenter", lighten);
+  }
+  return (lightenStatus = "un-paused");
+}
+startPainting();
