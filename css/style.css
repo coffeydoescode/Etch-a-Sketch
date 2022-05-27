@@ -152,7 +152,7 @@ button.lighten.selected {
   border-radius: 12px;
   margin: 1rem 1rem;
   padding: 1rem;
-  outline: 0.5rem solid #f9ce4e;
+  outline: 0.4rem solid #f9ce4e;
 }
 .grid-lines-toggle label {
   white-space: nowrap;
@@ -187,7 +187,7 @@ button.lighten.selected {
   border: 2px solid black;
   border-radius: 12px;
   margin: 1rem 1rem;
-  outline: 0.5rem solid #f9ce4e;
+  outline: 0.4rem solid #f9ce4e;
 }
 .color-picker label {
   font-size: 1rem;
