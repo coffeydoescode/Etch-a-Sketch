@@ -25,7 +25,7 @@ function rowCount(numbOfRows) {
 function createColumn(selector) {
   const column = document.createElement("div");
   column.className = "column";
-  column.classList.add("grid-lines");
+  column.classList.toggle("grid-lines");
   selector.append(column);
 }
 
@@ -162,6 +162,7 @@ function colorOn() {
     let currentDiv = columns[i];
     currentDiv.addEventListener("mouseenter", brushOn);
   }
+  divContainer.classList.add("active");
 }
 
 function colorOff() {
@@ -171,6 +172,7 @@ function colorOff() {
     let currentDiv = columns[i];
     currentDiv.removeEventListener("mouseenter", brushOn);
   }
+  divContainer.classList.remove("active");
 }
 
 function colorBtnHandler() {
@@ -224,6 +226,7 @@ function shadingOff() {
     let currentDiv = columns[i];
     currentDiv.removeEventListener("mouseenter", darken);
   }
+  divContainer.classList.remove("active");
 }
 
 function shadingOn() {
@@ -232,6 +235,7 @@ function shadingOn() {
   for (i = 0; i < columns.length; i++) {
     let currentDiv = columns[i];
     currentDiv.addEventListener("mouseenter", darken);
+    divContainer.classList.add("active");
   }
 }
 function darken(currentDiv) {
@@ -264,6 +268,7 @@ function lightenOn() {
     let currentDiv = columns[i];
     currentDiv.addEventListener("mouseenter", lighten);
   }
+  divContainer.classList.add("active");
 }
 
 function lightenOff() {
@@ -273,6 +278,7 @@ function lightenOff() {
     let currentDiv = columns[i];
     currentDiv.removeEventListener("mouseenter", lighten);
   }
+  divContainer.classList.remove("active");
 }
 
 function lighten(currentDiv) {
@@ -312,6 +318,7 @@ function activateRandom() {
     let currentDiv = columns[i];
     currentDiv.addEventListener("mouseenter", handleRandom);
   }
+  divContainer.classList.add("active");
 }
 
 function deactivateRandom() {
@@ -322,6 +329,7 @@ function deactivateRandom() {
     currentDiv.removeEventListener("mouseenter", handleRandom);
   }
   setColor(colorChoice.value);
+  divContainer.classList.remove("active");
 }
 
 function isSelected(element) {
@@ -537,17 +545,12 @@ function checkBtn() {
   }
 }
 
-// function clearListeners(){
-
-// }
-
 function pauseRandomBtn(currentTool) {
   if (currentTool == "random" && randomStatus != "paused") {
     pauseRandom();
     // console.log("random status is " + randomStatus);
   } else if (randomStatus == "paused") {
     unPauseRandom();
-
     console.log("random status is " + randomStatus);
   }
 }
@@ -558,6 +561,7 @@ function pauseRandom() {
     let currentDiv = columns[i];
     currentDiv.removeEventListener("mouseenter", handleRandom);
   }
+  divContainer.classList.remove("active");
   return (randomStatus = "paused");
 }
 
@@ -567,6 +571,7 @@ function unPauseRandom() {
     let currentDiv = columns[i];
     currentDiv.addEventListener("mouseenter", handleRandom);
   }
+  divContainer.classList.add("active");
   return (randomStatus = "un-paused");
 }
 
@@ -576,7 +581,6 @@ function pauseColorBtn(currentTool) {
     // console.log("color status is " + colorStatus);
   } else if (colorStatus == "paused") {
     unPauseColor();
-
     console.log("color status is " + colorStatus);
   }
 }
@@ -587,6 +591,7 @@ function pauseColor() {
     let currentDiv = columns[i];
     currentDiv.removeEventListener("mouseenter", brushOn);
   }
+  divContainer.classList.remove("active");
   return (colorStatus = "paused");
 }
 
@@ -596,6 +601,7 @@ function unPauseColor() {
     let currentDiv = columns[i];
     currentDiv.addEventListener("mouseenter", brushOn);
   }
+  divContainer.classList.add("active");
   return (colorStatus = "un-paused");
 }
 
@@ -605,7 +611,6 @@ function pauseDarkenBtn(currentTool) {
     // console.log("darken status is " + darkenStatus);
   } else if (darkenStatus == "paused") {
     unPauseDarken();
-
     console.log("darken status is " + darkenStatus);
   }
 }
@@ -616,6 +621,7 @@ function pauseDarken() {
     let currentDiv = columns[i];
     currentDiv.removeEventListener("mouseenter", darken);
   }
+  divContainer.classList.remove("active");
   return (darkenStatus = "paused");
 }
 
@@ -625,6 +631,7 @@ function unPauseDarken() {
     let currentDiv = columns[i];
     currentDiv.addEventListener("mouseenter", darken);
   }
+  divContainer.classList.add("active");
   return (darkenStatus = "un-paused");
 }
 
@@ -634,7 +641,6 @@ function pauseLightenBtn(currentTool) {
     // console.log("Lighten status is " + lightenStatus);
   } else if (lightenStatus == "paused") {
     unPauseLighten();
-
     console.log("Lighten status is " + lightenStatus);
   }
 }
@@ -645,6 +651,7 @@ function pauseLighten() {
     let currentDiv = columns[i];
     currentDiv.removeEventListener("mouseenter", lighten);
   }
+  divContainer.classList.remove("active");
   return (lightenStatus = "paused");
 }
 
@@ -654,6 +661,7 @@ function unPauseLighten() {
     let currentDiv = columns[i];
     currentDiv.addEventListener("mouseenter", lighten);
   }
+  divContainer.classList.add("active");
   return (lightenStatus = "un-paused");
 }
 startPainting();
